@@ -13,6 +13,7 @@ type config struct {
 	port int
 	env string
 }
+
 // application hold dependencies for our HTTP handlers, helpers, middleware
 type application struct {
 	config config
