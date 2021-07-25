@@ -1,6 +1,5 @@
 
 ## Away - bookings and reservations system app
-___
 
 ### Project overview
 Bookings and reservations system for small Bed & Breakfast.
