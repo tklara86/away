@@ -3,6 +3,7 @@ package main
 import (
 	"flag"
 	"fmt"
+	"github.com/tklara86/away/cmd/pkg/handlers"
 	"log"
 	"net/http"
 	"os"
@@ -14,13 +15,13 @@ type config struct {
 	env string
 }
 
-// application hold dependencies for our HTTP handlers, helpers, middleware
-type application struct {
+// Application holds dependencies for our HTTP handlers, helpers, middleware
+type Application struct {
 	config config
 	logger *log.Logger
 }
 
-
+// main is the main application function
 func main() {
 
 	var cfg config
@@ -32,15 +33,15 @@ func main() {
 
 	logger := log.New(os.Stdout, "", log.LstdFlags)
 
-	app := &application{
-		config: cfg,
-		logger: logger,
-	}
+	//app := &Application{
+	//	config: cfg,
+	//	logger: logger,
+	//}
 
 	mux := http.NewServeMux()
 
-	mux.HandleFunc("/", app.Home)
-	mux.HandleFunc("/about", app.About)
+	mux.HandleFunc("/", handlers.Home)
+	mux.HandleFunc("/about", handlers.About)
 
 	// Creates a file server which serves files out of the "./ui/static" directory.
 	fileServer := http.FileServer(http.Dir("./ui/static"))
