@@ -8,7 +8,7 @@
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
         <link rel="shortcut icon" type="image/jpg" href="/static/images/favicon.ico">
         <link rel="stylesheet" href="/static/dist/main.css">
-        <title>Away - Home Page</title>
+        <title>Away - {{ index .StringMap "pageTitle" }}</title>
 
         {{ block "css" . }}
 
