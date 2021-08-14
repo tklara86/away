@@ -33,15 +33,13 @@ func main() {
 
 	logger := log.New(os.Stdout, "", log.LstdFlags)
 
-	mux := http.NewServeMux()
-
-	mux.HandleFunc("/", handlers.Repo.Home)
-	mux.HandleFunc("/about", handlers.Repo.About)
+	mux := Routes(&app)
 
 	// Creates a file server which serves files out of the "./ui/static" directory.
-	fileServer := http.FileServer(http.Dir("./ui/static"))
+	//fileServer := http.FileServer(http.Dir("./ui/static"))
 
-	mux.Handle("/static/", http.StripPrefix("/static", fileServer))
+
+	//mux.("/static/", http.StripPrefix("/static", fileServer))
 
 	srv := http.Server{
 		Addr: ":4000",
