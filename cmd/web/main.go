@@ -49,11 +49,6 @@ func main() {
 
 	mux := Routes(&app)
 
-	// Creates a file server which serves files out of the "./ui/static" directory.
-	//fileServer := http.FileServer(http.Dir("./ui/static"))
-
-
-	//mux.("/static/", http.StripPrefix("/static", fileServer))
 
 	srv := http.Server{
 		Addr: ":4000",
