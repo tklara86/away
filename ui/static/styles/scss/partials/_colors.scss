@@ -45,6 +45,12 @@
   --primary-blue: hsla(var(--palette-blue-50), 100%);
   --primary-green: hsla(var(--palette-green-40), 100%);
   --primary-orange: hsla(var(--palette-orange-50), 100%);
+  --text-body: #181614;
+  --linksColor: #696969;
+  --linksHover: #181614;
+  --navbarBg: #F4F2EF;
+  --linksHoverBg: #EAE6DE;
+
 }
 
 $theme-colors: (
@@ -62,8 +68,6 @@ $theme-colors: (
     "warning-light--text": #f0b400,
     "primary-light--text": #265cd4,
     "secondary-light--text":#191919,
-
-
   ),
   "bg-color": (
     "primary": var(--primary-blue),

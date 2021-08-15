@@ -19,7 +19,7 @@ func Routes(app *config.AppConfig) http.Handler {
 	// Creates a file server which serves files out of the "./ui/static" directory.
 	fileServer := http.FileServer(http.Dir("./ui/static"))
 
-	r.Handle("/static/", http.StripPrefix("/static", fileServer))
+	r.Handle("/static/*", http.StripPrefix("/static", fileServer))
 
 	return r
 }

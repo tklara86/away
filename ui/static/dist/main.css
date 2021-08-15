@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap");
 .mt-1 {
   margin-top: 1px;
 }
@@ -2027,6 +2027,23 @@ ol, ol li, p:not(:last-of-type), span, ul, ul li {
   --primary-blue:hsla(var(--palette-blue-50),100%);
   --primary-green:hsla(var(--palette-green-40),100%);
   --primary-orange:hsla(var(--palette-orange-50),100%);
+  --text-body:#181614;
+  --linksColor:#696969;
+  --linksHover:#181614;
+  --navbarBg:#f4f2ef;
+  --linksHoverBg:#eae6de;
+}
+
+.icon {
+  fill: var(--linksColor);
+  height: 25px;
+  transition: 0.3s ease-in;
+  width: 25px;
+}
+
+.icon-admin {
+  height: 20px;
+  width: 20px;
 }
 
 html {
@@ -2042,7 +2059,7 @@ html {
 
 body {
   box-sizing: border-box;
-  color: #161616;
+  color: var(--text-body);
   font-size: var(--text-base-size);
 }
 
@@ -2214,12 +2231,10 @@ label {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   border: none;
-  border-radius: 3px;
   cursor: pointer;
   font-size: 1.6rem;
   line-height: 1;
   outline: none;
-  text-decoration: none;
   transition: 0.3s;
   white-space: nowrap;
 }
@@ -2329,6 +2344,129 @@ label {
 
 .btn-warning--light:hover {
   background-color: tint-shade-color-control(#fff, "bg-color", "warning", 8);
+}
+
+.hidden {
+  display: none;
+}
+
+.btn {
+  align-items: center;
+  -webkit-appearance: none;
+  background: transparent;
+  border-radius: 3px;
+  box-sizing: border-box;
+  color: #fff;
+  display: inline-flex;
+  font-size: 14px;
+  font-weight: 500;
+  height: 50px;
+  justify-content: center;
+  padding: 0 30px;
+  position: relative;
+  text-decoration: none;
+  transition: 0.2s linear;
+}
+
+.btn:focus, .btn:hover {
+  cursor: pointer;
+}
+
+.btn-xs {
+  font-size: 13px;
+  height: 30px;
+  padding: 0 20px;
+}
+
+.btn-sm {
+  height: 40px;
+}
+
+.btn-md {
+  height: 50px;
+}
+
+.btn-lg {
+  font-size: 16px;
+  height: 70px;
+  padding: 0 50px;
+}
+
+.header {
+  background: var(--navbarBg);
+  line-height: 80px;
+  min-height: 80px;
+  padding: 0 50px;
+}
+
+.primary {
+  flex-wrap: nowrap;
+  justify-content: space-between;
+}
+
+.nav, .primary {
+  align-items: center;
+  display: flex;
+}
+
+.nav {
+  flex-direction: row;
+  width: 100%;
+}
+
+.nav.nav-start {
+  flex-basis: 100%;
+  justify-content: flex-start;
+}
+
+.nav.nav-end {
+  justify-content: flex-end;
+}
+
+.nav-brand-toggle {
+  align-items: center;
+  display: flex;
+  justify-content: space-between;
+  width: 5%;
+}
+
+.nav-item {
+  color: var(--linksColor);
+  font-size: 16px;
+  font-weight: 500;
+  margin: 0 6px;
+  padding: 0 10px;
+}
+
+.nav-item:active, .nav-item:hover {
+  background-color: var(--linksHoverBg);
+  transition: 0.2s ease;
+}
+
+.nav-collapse {
+  align-items: center;
+  display: flex;
+  flex-direction: row;
+  width: 95%;
+}
+
+a {
+  color: var(--linksColor);
+  text-decoration: none;
+}
+
+a.home {
+  color: var(--text-body);
+}
+
+a:active, a:hover {
+  color: var(--linksHover);
+  transition: 0.3s ease;
+}
+
+a:hover .icon {
+  fill: var(--linksHover);
+  transition: 0.3s ease;
 }
 
 .album-container {
