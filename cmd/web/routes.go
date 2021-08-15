@@ -11,6 +11,7 @@ func Routes(app *config.AppConfig) http.Handler {
 	r := chi.NewRouter()
 
 	r.Use(NoSurf)
+	r.Use(SessionLoad)
 
 	r.Get("/", handlers.Repo.Home)
 	r.Get("/about", handlers.Repo.About)
