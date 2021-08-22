@@ -1983,11 +1983,13 @@ form legend, h1, h2, h3, h4 {
 }
 
 ol, p:not(:last-of-type), ul {
+  line-height: var(--body-line-height);
   margin-bottom: calc(var(--space-unit)*.75);
 }
 
-ol, ol li, p:not(:last-of-type), span, ul, ul li {
+ol li, span, ul li {
   line-height: var(--body-line-height);
+  list-style: none;
 }
 
 :root {
@@ -2031,24 +2033,34 @@ ol, ol li, p:not(:last-of-type), span, ul, ul li {
   --linksColor:#696969;
   --linksHover:#181614;
   --navbarBg:#f4f2ef;
+  --navbarBgAlt:#f3f4ef;
   --linksHoverBg:#eae6de;
+  --linksHoverBgAlt:#e6ecd7;
 }
 
 .icon {
   fill: var(--linksColor);
-  height: 25px;
   transition: 0.3s ease-in;
+}
+
+.icon, .icon-admin {
+  height: 25px;
   width: 25px;
 }
 
-.icon-admin {
-  height: 20px;
-  width: 20px;
+.icon-account {
+  height: 15px;
+  margin-right: 5px;
+  width: 15px;
 }
 
 html {
   font-family: Inter, --apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell, Open Sans, Helvetica Neue, sans-serif;
   font-size: 62.5%;
+}
+
+#dropDownMenuButton > * {
+  pointer-events: none;
 }
 
 *, :after, :before {
@@ -2221,25 +2233,26 @@ form {
 
 label {
   font-size: calc(var(--text-base-size));
+  font-weight: 600;
 }
 
-.btn, label {
-  font-weight: 600;
+.btn, button {
+  border: none;
 }
 
 .btn {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  border: none;
   cursor: pointer;
   font-size: 1.6rem;
+  font-weight: 600;
   line-height: 1;
   outline: none;
   transition: 0.3s;
   white-space: nowrap;
 }
 
-.btn-llarge {
+.btn-large {
   padding: 0;
 }
 
@@ -2360,7 +2373,6 @@ label {
   display: inline-flex;
   font-size: 14px;
   font-weight: 500;
-  height: 50px;
   justify-content: center;
   padding: 0 30px;
   position: relative;
@@ -2372,62 +2384,54 @@ label {
   cursor: pointer;
 }
 
-.btn-xs {
-  font-size: 13px;
-  height: 30px;
-  padding: 0 20px;
-}
-
-.btn-sm {
-  height: 40px;
-}
-
-.btn-md {
-  height: 50px;
-}
-
-.btn-lg {
-  font-size: 16px;
-  height: 70px;
-  padding: 0 50px;
-}
-
 .header {
   background: var(--navbarBg);
-  line-height: 80px;
+  display: flex;
   min-height: 80px;
   padding: 0 50px;
 }
 
 .primary {
-  flex-wrap: nowrap;
-  justify-content: space-between;
-}
-
-.nav, .primary {
   align-items: center;
   display: flex;
+  flex-wrap: nowrap;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.nav-class.home {
+  flex-basis: 5%;
 }
 
 .nav {
+  align-items: center;
+  display: flex;
   flex-direction: row;
   width: 100%;
 }
 
-.nav.nav-start {
-  flex-basis: 100%;
+.nav.nav-left {
   justify-content: flex-start;
 }
 
-.nav.nav-end {
+.nav.nav-right {
   justify-content: flex-end;
+}
+
+.navContentWrapper {
+  display: flex;
+  flex-basis: 100%;
 }
 
 .nav-brand-toggle {
   align-items: center;
   display: flex;
   justify-content: space-between;
-  width: 5%;
+}
+
+.nav-toggle {
+  cursor: pointer;
+  display: none;
 }
 
 .nav-item {
@@ -2436,10 +2440,10 @@ label {
   font-weight: 500;
   margin: 0 6px;
   padding: 0 10px;
+  vertical-align: middle;
 }
 
 .nav-item:active, .nav-item:hover {
-  background-color: var(--linksHoverBg);
   transition: 0.2s ease;
 }
 
@@ -2447,7 +2451,39 @@ label {
   align-items: center;
   display: flex;
   flex-direction: row;
-  width: 95%;
+  width: 100%;
+}
+
+.dropdown {
+  position: relative;
+}
+
+.dropdown-menu {
+  background: var(--navbarBg);
+  box-shadow: 5px 5px 15px 5px rgba(0, 0, 0, 0.025);
+  position: absolute;
+  top: 40px;
+  width: -webkit-max-content;
+  width: -moz-max-content;
+  width: max-content;
+}
+
+.dropdown-menu-account {
+  right: 0;
+}
+
+.dropdown-item {
+  padding: 5px 10px;
+  width: 100%;
+}
+
+.dropdown-item:hover {
+  background: var(--linksHoverBg);
+  transition: 0.3s ease;
+}
+
+.dropdown-item a {
+  padding: 0 10px;
 }
 
 a {
@@ -2469,6 +2505,49 @@ a:hover .icon {
   transition: 0.3s ease;
 }
 
+@media (max-width: 768px) {
+  .nav-toggle {
+    display: block;
+  }
+
+  .nav-collapse {
+    left: 0;
+    position: absolute;
+    top: 80px;
+  }
+
+  .navContentWrapper {
+    background: var(--navbarBg);
+    flex-direction: column;
+  }
+
+  .nav.nav-left, .nav.nav-right {
+    display: block;
+  }
+
+  .dropdown-menu {
+    background: #fff;
+    box-shadow: none;
+    position: relative;
+    width: 100%;
+  }
+
+  .navContentWrapper.hidden {
+    display: none;
+  }
+
+  .header, .nav-item {
+    padding: 0 20px;
+  }
+
+  .nav-item {
+    margin: 10px 0;
+  }
+
+  .dropdown-menu {
+    top: 0;
+  }
+}
 .album-container {
   display: grid;
   gap: 3rem;

@@ -2,6 +2,7 @@
   display: none;
 }
 
+
 .btn {
   align-items: center;
   background: transparent;
@@ -11,7 +12,6 @@
   display: inline-flex;
   font-size: 14px;
   font-weight: 500;
-  height: 50px;
   justify-content: center;
   padding: 0 30px;
   position: relative;
@@ -25,17 +25,11 @@
 
 }
 
-.btn-xs { height: 30px; padding: 0 20px; font-size: 13px; }
-.btn-sm { height: 40px; }
-.btn-md { height: 50px; }
-.btn-lg { height: 70px; padding: 0 50px; font-size: 16px; }
-
-
 .header {
   background: var(--navbarBg);
-  line-height: 80px;
   min-height: 80px;
   padding: 0 50px;
+  display: flex;
 }
 
 .primary {
@@ -43,46 +37,56 @@
   display: flex;
   flex-wrap: nowrap;
   justify-content: space-between;
+  width: 100%;
 
 }
-
+.nav-class.home {
+  flex-basis: 5%;
+}
 .nav {
   align-items: center;
   display: flex;
   flex-direction: row;
   width: 100%;
 
-  &.nav-start {
+  &.nav-left{
     justify-content: flex-start;
-    flex-basis: 100%;
+
   }
 
-  &.nav-end {
+  &.nav-right {
     justify-content: flex-end;
 
   }
 }
 
+.navContentWrapper {
+  display: flex;
+  flex-basis: 100%;
+}
 .nav-brand-toggle {
   align-items: center;
   display: flex;
   justify-content: space-between;
-  width: 5%;
 }
-
+.nav-toggle {
+  display: none;
+  cursor: pointer;
+}
 .nav-item {
   font-size: 16px;
   font-weight: 500;
   margin: 0 6px;
   color: var(--linksColor);
   padding: 0 10px;
+  vertical-align: middle;
 
 }
 
 .nav-item:hover,
 .nav-item:active {
   transition: .2s ease;
-  background-color: var(--linksHoverBg);
+ // background-color: var(--linksHoverBg);
 }
 
 
@@ -90,7 +94,33 @@
   align-items: center;
   display: flex;
   flex-direction: row;
-  width: 95%;
+  width: 100%;
+}
+
+.dropdown {
+  position: relative;
+}
+.dropdown-menu {
+  background: var(--navbarBg);
+  position: absolute;
+  width: max-content;
+  top: 40px;
+  box-shadow: 5px 5px 15px 5px rgba(0, 0, 0, 0.025);
+  &-account {
+    right: 0;
+  }
+}
+
+.dropdown-item {
+  padding: 5px 10px;
+  width: 100%;
+  &:hover {
+    transition: .3s ease;
+    background: var(--linksHoverBg);
+  }
+  a {
+    padding: 0 10px;
+  }
 }
 
 a {
@@ -109,4 +139,45 @@ a:active {
 a:hover .icon {
   transition: .3s ease;
   fill: var(--linksHover);
+}
+
+@include breakpoint(lg) {
+  .nav-toggle {
+    display: block;
+  }
+
+  .nav-collapse {
+    left: 0;
+    position: absolute;
+    top: 80px;
+  }
+  .navContentWrapper {
+    flex-direction: column;
+    background: var(--navbarBg);
+  }
+  .nav.nav-left,
+  .nav.nav-right{
+    display: block;
+  }
+  .dropdown-menu {
+    position: relative;
+    box-shadow: none;
+    background: #fff;
+    width: 100%;
+  }
+
+  .navContentWrapper.hidden {
+    display: none;
+  }
+  .header {
+    padding: 0 20px;
+  }
+  .nav-item {
+    margin: 10px 0;
+    padding: 0 20px;
+  }
+  .dropdown-menu {
+    top: 0;
+  }
+
 }

@@ -9,7 +9,10 @@ html {
   font-family: $font-primary;
 }
 
-
+// so you can click the svg
+#dropDownMenuButton > * {
+  pointer-events: none;
+}
 *,
 *::after,
 *::before {
