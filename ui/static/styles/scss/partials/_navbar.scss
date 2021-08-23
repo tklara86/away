@@ -30,6 +30,10 @@
   min-height: 80px;
   padding: 0 50px;
   display: flex;
+  border-bottom: 1px solid var(--borderHeader);
+  position: fixed;
+  z-index: 11;
+  width: 100%;
 }
 
 .primary {
@@ -42,6 +46,8 @@
 }
 .nav-class.home {
   flex-basis: 5%;
+  display: flex;
+  justify-content: center;
 }
 .nav {
   align-items: center;
@@ -101,11 +107,12 @@
   position: relative;
 }
 .dropdown-menu {
-  background: var(--navbarBg);
+  background: var(--dropDownBg);
   position: absolute;
   width: max-content;
   top: 40px;
   box-shadow: 5px 5px 15px 5px rgba(0, 0, 0, 0.025);
+  z-index: 10;
   &-account {
     right: 0;
   }
@@ -154,6 +161,7 @@ a:hover .icon {
   .navContentWrapper {
     flex-direction: column;
     background: var(--navbarBg);
+    z-index: 10;
   }
   .nav.nav-left,
   .nav.nav-right{
@@ -162,7 +170,6 @@ a:hover .icon {
   .dropdown-menu {
     position: relative;
     box-shadow: none;
-    background: #fff;
     width: 100%;
   }
 
@@ -175,6 +182,8 @@ a:hover .icon {
   .nav-item {
     margin: 10px 0;
     padding: 0 20px;
+    width: 100%;
+    justify-content: flex-start;
   }
   .dropdown-menu {
     top: 0;

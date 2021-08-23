@@ -130,9 +130,10 @@ form legend {
 
 ul,
 ol,
-p:not(:last-of-type) {
+p {
   margin-bottom: $space--sm;
   line-height: $body-line-height;
+  color: var(--paragraph-copy);
 }
 ul li,
 ol li,

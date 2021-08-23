@@ -7,7 +7,7 @@ button {
   outline: none;
   border-radius: 3px;
   line-height: 1;
-  font-weight: 600;
+  font-weight: 400;
   transition: 0.3s;
   white-space: nowrap;
   text-decoration: none;
@@ -119,4 +119,8 @@ button {
       background-color: tint-shade-color-control(white, "bg-color", "warning", 8);
     }
   }
+}
+
+.max-content {
+  width: max-content;
 }

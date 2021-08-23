@@ -46,12 +46,16 @@
   --primary-green: hsla(var(--palette-green-40), 100%);
   --primary-orange: hsla(var(--palette-orange-50), 100%);
   --text-body: #181614;
+  --paragraph-copy: #3c3c3c;
   --linksColor: #696969;
   --linksHover: #181614;
   --navbarBg: #F4F2EF;
   --navbarBgAlt: #f3f4ef;
   --linksHoverBg: #EAE6DE;
   --linksHoverBgAlt: #e6ecd7;
+  --borderHeader: #dfdfdf;
+  --primary-red: #d94e4e;
+  --dropDownBg: #dbdbdb;
 
 }
 
@@ -72,7 +76,7 @@ $theme-colors: (
     "secondary-light--text":#191919,
   ),
   "bg-color": (
-    "primary": var(--primary-blue),
+    "primary":  #d94e4e,
     "primary-light": #2463eb45,
     "primary-dark": #1c1b1b,
     "secondary-dark": #454545,
@@ -110,17 +114,17 @@ $theme-colors: (
 	Example:
 	background-color: tint-shade-color-control(white, 'primary', 'dark', 2.5);
  */
-// @function tint-shade-color-control($color-base: white, $color-name: "text", $key: "grey-light", $level: 0) {
-//   $color-interval: 10%;
-//   @if ($color-base == white) {
-//     $color: theme-colors($color-name, $key);
-//     @return mix($color-base, $color, $level * $color-interval);
-//   }
-//   @if ($color-base == black) {
-//     $color: theme-colors($color-name, $key);
-//     @return mix($color-base, $color, $level * $color-interval);
-//   }
-// }
+ @function tint-shade-color-control($color-base: white, $color-name: "text", $key: "grey-light", $level: 0) {
+   $color-interval: 10%;
+   @if ($color-base == white) {
+     $color: theme-colors($color-name, $key);
+     @return mix($color-base, $color, $level * $color-interval);
+   }
+   @if ($color-base == black) {
+     $color: theme-colors($color-name, $key);
+     @return mix($color-base, $color, $level * $color-interval);
+   }
+ }
 
 /* 
 	Controls opacity of color specified in $theme-colors
