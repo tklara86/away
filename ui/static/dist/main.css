@@ -2042,6 +2042,7 @@ ol li, span, ul li {
   --linksHoverBgAlt:#e6ecd7;
   --borderHeader:#dfdfdf;
   --primary-red:#d94e4e;
+  --primary-red-light:#d94e4e40;
   --dropDownBg:#dbdbdb;
   --bodyBackground:#eae8e4;
 }
@@ -2077,6 +2078,19 @@ ol li, span, ul li {
   height: 20px;
   margin-right: 10px;
   width: 20px;
+}
+
+.icon-alert, .icon-success {
+  height: 16px;
+  width: 16px;
+}
+
+.icon-alert {
+  fill: red;
+}
+
+.icon-success {
+  fill: green;
 }
 
 html {
@@ -2168,7 +2182,7 @@ form {
 }
 
 .input-control {
-  border: 2px solid #eee;
+  border: 2px solid #ddd;
   border-radius: 7px;
   font-size: calc(var(--text-base-size));
   outline: none;
@@ -2188,7 +2202,7 @@ form {
 }
 
 .input-control--small {
-  margin-bottom: calc(var(--space-unit)*1.25);
+  margin-bottom: 30px;
   margin-top: calc(var(--space-unit)*.5);
   padding: calc(var(--space-unit)*.75);
 }
@@ -2253,13 +2267,70 @@ form {
 
 .form-control input:focus, .form-control textarea:focus {
   background-color: #fff;
-  border-color: #3b82f6;
-  box-shadow: 0 0 0 2px #bfdbfe;
+  border-color: var(--primary-red);
+  box-shadow: 0 0 0 2px var(--primary-red-light);
+}
+
+.form-control input.is-success, .form-control textarea.is-success {
+  background-color: #fff;
+  border-color: #0a910a;
+  box-shadow: 0 0 0 2px rgba(138, 208, 110, 0.58);
+}
+
+.form-control input.is-danger, .form-control textarea.is-danger {
+  background-color: #fff;
+  border-color: red;
+  box-shadow: none;
 }
 
 label {
   font-size: calc(var(--text-base-size));
   font-weight: 600;
+}
+
+.form-inline {
+  display: flex;
+}
+
+.form-inline .form-control {
+  margin-right: 20px;
+}
+
+.form-alert {
+  height: 16px;
+  line-height: 0;
+  position: absolute;
+  right: 25px;
+  top: 50%;
+  transform: translateY(-6px);
+  width: 16px;
+}
+
+.form-alert.is-success {
+  background-color: green;
+  -webkit-mask-image: url(/static/icons/check-circled.svg);
+  mask-image: url(/static/icons/check-circled.svg);
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+}
+
+.form-alert.is-danger {
+  background-color: red;
+  -webkit-mask-image: url(/static/icons/exclamation-triangle.svg);
+  mask-image: url(/static/icons/exclamation-triangle.svg);
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+}
+
+.error-message {
+  background: red;
+  border-radius: 3px;
+  bottom: 5px;
+  color: #fff;
+  font-size: 14px;
+  left: 15px;
+  padding: 0 5px;
+  position: absolute;
 }
 
 .hidden {
@@ -2307,8 +2378,7 @@ label {
 
 .nav-class.home {
   display: flex;
-  flex-basis: 5%;
-  justify-content: center;
+  flex-basis: 10%;
 }
 
 .nav {

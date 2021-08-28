@@ -5,7 +5,7 @@ form {
 .input-control {
   width: 100%;
   font-size:$text--sm;
-  border: 2px solid #eee;
+  border: 2px solid #ddd;
   border-radius: 7px;
 
   outline: none;
@@ -25,7 +25,7 @@ form {
 
 .input-control--small {
   margin-top: $space--xs;
-  margin-bottom: $space--md;
+  margin-bottom: 30px;
   padding: $space--sm;
 }
 
@@ -88,9 +88,22 @@ form {
   textarea:focus,
   input:focus {
     background-color: white;
-    border-color: #3b82f6;
-    box-shadow: 0 0 0 2px #bfdbfe;
+    border-color: var(--primary-red);
+    box-shadow: 0 0 0 2px var(--primary-red-light);
   }
+  textarea.is-success,
+  input.is-success {
+    background-color: white;
+    border-color: #0a910a;
+    box-shadow: 0 0 0 2px rgba(138, 208, 110, 0.58);
+  }
+  textarea.is-danger,
+  input.is-danger {
+    background-color: white;
+    border-color:red;
+    box-shadow: none
+  }
+
 }
 
 label {
@@ -99,3 +112,41 @@ label {
 }
 
 
+.form-inline {
+  display: flex;
+
+  .form-control {
+    margin-right: 20px;
+  }
+}
+
+.form-alert {
+  position: absolute;
+  top: 50%;
+  right: 25px;
+  transform: translate(0px, -6px);
+  line-height: 0;
+  width: 16px;
+  height: 16px;
+  &.is-success {
+    background-color: green;
+    mask-image: url('/static/icons/check-circled.svg');
+    mask-repeat:no-repeat;
+  }
+  &.is-danger {
+    background-color: red;
+    mask-image: url('/static/icons/exclamation-triangle.svg');
+    mask-repeat: no-repeat;
+  }
+}
+
+.error-message {
+  bottom: 5px;
+  font-size: 14px;
+  color: #fff;
+  left: 15px;
+  position: absolute;
+  background: red;
+  padding: 0 5px;
+  border-radius: 3px;
+}

@@ -61,6 +61,99 @@ const toggleNav = () => {
 toggleNav();
 
 
+// Validate form
+class FormValidator {
+    constructor(form, fields) {
+        this.form = form;
+        this.fields = fields;
+    }
+
+    validateOnSubmit() {
+        let self = this;
+        this.form.addEventListener('submit', (e) => {
+            e.preventDefault();
+            Array.from(self.fields, field =>{
+                self.validateFields(field);
+            })
+        })
+    }
+
+    validateOnEntry() {
+        let self = this;
+        Array.from(self.fields, field =>{
+            const input = field.getAttribute('id')
+            const inputId = document.querySelector(`#${input}`)
+            inputId.addEventListener('input', e => {
+               self.validateFields(field);
+
+            })
+        })
+    }
+
+    validateFields(field) {
+        if (field.value.trim() === '') {
+            this.setStatus(field, `${field.previousElementSibling.innerHTML} cannot be blank`, "error")
+        } else {
+            this.setStatus(field, null, "success")
+        }
+        if (field.type === 'email') {
+            const re = /^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
+            if (re.test(field.value)) {
+                this.setStatus(field, null, "success")
+            } else {
+                this.setStatus(field, `Please enter a valid email address`, "error")
+            }
+        }
+        if (field.id === 'passwordConfirmation') {
+          const passwordField = this.form.querySelector("#password");
+
+          if (field.value.trim() === "") {
+              this.setStatus(field, `Password confirmation required`, "error")
+          } else if (field.value !== passwordField.value) {
+              this.setStatus(field, `Password does not match`, "error")
+          } else {
+              this.setStatus(field, null, "success")
+          }
+        }
+    }
+
+    setStatus(field, message, status) {
+        const errorMessage = field.parentElement.querySelector('.error-message');
+        const formAlert = field.parentElement.querySelector('.form-alert');
+
+        if (status === 'success') {
+            formAlert.classList.remove('is-danger')
+            formAlert.classList.add('is-success')
+            field.classList.remove('is-danger')
+            field.classList.add('is-success')
+            if (errorMessage) { errorMessage.innerHTML = '' }
+
+        }
+
+        if (status === 'error') {
+            formAlert.classList.remove('is-success')
+            errorMessage.innerHTML = message
+            formAlert.classList.add('is-danger')
+            field.classList.add('is-danger')
+        }
+    }
+
+
+    init() {
+        this.validateOnSubmit()
+        this.validateOnEntry()
+    }
+}
+
+const form = document.querySelector('.js-validateForm');
+const fields = document.querySelectorAll('.js-validateForm input')
+
+
+const validator = new FormValidator(form, fields)
+validator.init()
+
+
+
 
 
 

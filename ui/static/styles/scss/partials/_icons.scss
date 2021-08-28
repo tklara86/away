@@ -39,3 +39,17 @@
   margin-right: 10px;
   fill: #d94e4e;
 }
+.icon-success,
+.icon-alert {
+  width: 16px;
+  height: 16px;
+}
+
+.icon-alert {
+  fill: red;
+}
+
+.icon-success {
+  fill: green;
+}
+
