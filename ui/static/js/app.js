@@ -115,6 +115,20 @@ class FormValidator {
               this.setStatus(field, null, "success")
           }
         }
+
+        if (field.id === 'endDate') {
+            const startDate = this.form.querySelector('#startDate');
+
+            const start = new Date(startDate.value)
+            const end = new Date(field.value)
+
+            if (start.getTime() >= end.getTime()) {
+                this.setStatus(field, `Select date after your arrival`, "error")
+            } else {
+                this.setStatus(field, null, "success")
+            }
+
+        }
     }
 
     setStatus(field, message, status) {
@@ -150,7 +164,11 @@ const fields = document.querySelectorAll('.js-validateForm input')
 
 
 const validator = new FormValidator(form, fields)
-validator.init()
+
+if (form != null) {
+    validator.init()
+}
+
 
 
 
