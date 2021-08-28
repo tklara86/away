@@ -1,3 +1,4 @@
+@import url("https://fonts.googleapis.com/css2?family=Barlow:wght@100&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap");
 .mt-1 {
   margin-top: 1px;
@@ -2294,6 +2295,7 @@ label {
 
 .form-inline .form-control {
   margin-right: 20px;
+  width: 100%;
 }
 
 .form-alert {
@@ -2486,6 +2488,7 @@ a:hover .icon {
 
 @media (max-width: 768px) {
   .nav-toggle {
+    background: none;
     display: block;
   }
 

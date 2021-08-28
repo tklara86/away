@@ -151,6 +151,7 @@ a:hover .icon {
 @include breakpoint(lg) {
   .nav-toggle {
     display: block;
+    background: none;
   }
 
   .nav-collapse {
