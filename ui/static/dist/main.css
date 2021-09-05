@@ -1978,9 +1978,12 @@
   font-size: calc(var(--text-base-size)/var(--text-scale-ratio)/var(--text-scale-ratio));
 }
 
+h1 {
+  letter-spacing: -1.5px;
+}
+
 form legend, h1, h2, h3, h4 {
   font-weight: 400;
-  letter-spacing: -1.5px;
   line-height: var(--heading-line-height);
   margin-bottom: calc(var(--space-unit)*.25);
 }
@@ -2364,7 +2367,7 @@ label {
   min-height: 80px;
   padding: 0 50px;
   position: fixed;
-  z-index: 11;
+  z-index: 2;
 }
 
 .header, .primary {
@@ -2532,6 +2535,14 @@ a:hover .icon {
     top: 0;
   }
 }
+.notie-container {
+  box-shadow: none;
+}
+
+.swal2-popup.swal2-toast .swal2-title {
+  font-size: medium !important;
+}
+
 button {
   border: none;
 }

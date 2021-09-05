@@ -1,0 +1,9 @@
+/* notie override styles here */
+.notie-container {
+  box-shadow: none;
+}
+
+/* sweet alert override styles here */
+.swal2-popup.swal2-toast .swal2-title{
+  font-size: initial !important;
+}

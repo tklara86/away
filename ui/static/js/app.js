@@ -1,3 +1,4 @@
+let attention = Prompt();
 const dropdown = document.querySelector('.js-nav');
 
 dropdown.addEventListener('click', function(e) {
@@ -76,6 +77,7 @@ class FormValidator {
                 self.validateFields(field);
             })
         })
+
     }
 
     validateOnEntry() {
@@ -168,5 +170,91 @@ const validator = new FormValidator(form, fields)
 if (form != null) {
     validator.init()
 }
+
+//attention.toast({msg: "Hello", icon: "error"});
+//attention.error({msg: "heelo", footer: "<h2>sdsd</h2>"})
+
+function notify(msg, msgType) {
+    notie.alert({
+        type: msgType,
+        text: msg,
+    })
+}
+
+function notifyModal(title, text, icon, confirmationButton) {
+    Swal.fire({
+        title: title,
+        html: text,
+        icon: icon,
+        confirmButtonText: confirmationButton
+    })
+}
+
+function Prompt() {
+    let toast = function(c) {
+       const {
+           msg = '',
+           icon =  'success',
+           position = 'top-end',
+
+       } = c
+        const Toast = Swal.mixin({
+            toast: true,
+            title: msg,
+            position: position,
+            showConfirmButton: false,
+            timer: 3000,
+            timerProgressBar: true,
+            didOpen: (toast) => {
+                toast.addEventListener('mouseenter', Swal.stopTimer)
+                toast.addEventListener('mouseleave', Swal.resumeTimer)
+            }
+        })
+
+        Toast.fire({
+            icon: icon
+        })
+    }
+
+    let success = function(c) {
+
+        const {
+            msg = "",
+            title = "",
+            footer =  "",
+        } = c;
+        Swal.fire({
+            icon: 'success',
+            title: title,
+            text: msg,
+            footer: footer
+        })
+    }
+
+    let error = function(c) {
+
+        const {
+            msg = "",
+            title = "",
+            footer =  "",
+        } = c;
+        Swal.fire({
+            icon: 'error',
+            title: title,
+            text: msg,
+            footer: footer
+        })
+    }
+
+    return {
+        toast: toast,
+        success: success,
+        error: error,
+    }
+}
+
+
+
+
 
 //# sourceMappingURL=app.js.map
