@@ -2539,8 +2539,18 @@ a:hover .icon {
   box-shadow: none;
 }
 
-.swal2-popup.swal2-toast .swal2-title {
+.swal2-popup {
+  width: -webkit-max-content !important;
+  width: -moz-max-content !important;
+  width: max-content !important;
+}
+
+.swal2-popup.swal2-toast .swal2-title, .swal2-styled, .swal2-title {
   font-size: medium !important;
+}
+
+.swal2-title {
+  font-size: calc(var(--text-base-size)*var(--text-scale-ratio)*var(--text-scale-ratio)*var(--text-scale-ratio)) !important;
 }
 
 button {

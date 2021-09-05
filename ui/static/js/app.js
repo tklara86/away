@@ -161,18 +161,36 @@ class FormValidator {
     }
 }
 
-const form = document.querySelector('.js-validateForm');
-const fields = document.querySelectorAll('.js-validateForm input')
 
 
-const validator = new FormValidator(form, fields)
 
-if (form != null) {
-    validator.init()
-}
 
 //attention.toast({msg: "Hello", icon: "error"});
 //attention.error({msg: "heelo", footer: "<h2>sdsd</h2>"})
+
+let html = `
+    <form action="/about" class="js-validateForm">
+        <div class="form-inline">
+            <div class="form-control">
+                <label class="form-label" for="startDate">Arrival</label>
+                <input class="input-control input-control--small" type="date" name="startDate" id="startDate" placeholder="yyyy-mm-dd">
+                <span class="form-alert"></span>
+                <span class="error-message"></span>
+            </div>
+
+            <div class="form-control">
+                <label class="form-label" for="endDate">Departure</label>
+                <input class="input-control input-control--small" type="date" name="endDate" id="endDate" placeholder="yyyy-mm-dd">  
+                <span class="form-alert"></span>
+                <span class="error-message"></span>
+            </div>
+        </div>
+    </form>
+`;
+
+document.querySelector('.test').addEventListener('click', function () {
+   attention.custom({msg: html, title: 'Choose dates'}).then();
+})
 
 function notify(msg, msgType) {
     notie.alert({
@@ -190,6 +208,7 @@ function notifyModal(title, text, icon, confirmationButton) {
     })
 }
 
+// Prompt is module for alerts, notifications, and custom popup dialogs
 function Prompt() {
     let toast = function(c) {
        const {
@@ -246,15 +265,46 @@ function Prompt() {
         })
     }
 
+   async function custom(c) {
+        const {
+            msg = "",
+            title = ""
+        } = c;
+
+        const { value: formValues } = await Swal.fire({
+            title: title,
+            html: msg,
+            backdrop: false,
+            focusConfirm: false,
+            showCancelButton: true,
+            preConfirm: () => {
+                return [
+                    document.getElementById('startDate').value,
+                    document.getElementById('endDate').value
+                ]
+            },
+            didOpen: () => {
+                const form = document.querySelector('.js-validateForm');
+                const fields = document.querySelectorAll('.js-validateForm input')
+                const validator = new FormValidator(form, fields)
+
+                if (form != null) {
+                    validator.init()
+                }
+            }
+        })
+
+        if (formValues) {
+            Swal.fire(JSON.stringify(formValues))
+        }
+    }
+
     return {
         toast: toast,
         success: success,
         error: error,
+        custom: custom,
     }
 }
-
-
-
-
 
 //# sourceMappingURL=app.js.map
