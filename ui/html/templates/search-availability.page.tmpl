@@ -1,0 +1,26 @@
+{{ template  "base" .}}
+
+
+{{ define  "content"}}
+        <!-- Form -->
+        <form action="/about" method="get" class="js-validateForm">
+            <h3 class="mb-10">Search for Availability</h3>
+            <div class="form-inline">
+                <div class="form-control">
+                    <label class="form-label" for="startDate">Arrival</label>
+                    <input class="input-control input-control--small" type="date" name="startDate" id="startDate" placeholder="yyyy-mm-dd">
+                    <span class="form-alert"></span>
+                    <span class="error-message"></span>
+                </div>
+
+                <div class="form-control">
+                    <label class="form-label" for="endDate">Departure</label>
+                    <input class="input-control input-control--small" type="date" name="endDate" id="endDate" placeholder="yyyy-mm-dd">
+                    <span class="form-alert"></span>
+                    <span class="error-message"></span>
+                </div>
+            </div>
+            <button type="submit" class="btn btn-primary btn-medium">Submit</button>
+        </form>
+
+{{end}}

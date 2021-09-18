@@ -161,12 +161,15 @@ class FormValidator {
     }
 }
 
+const form = document.querySelector('.js-validateForm');
+const fields = document.querySelectorAll('.js-validateForm input')
+const validator = new FormValidator(form, fields)
+
+if (form != null) {
+    validator.init();
+}
 
 
-
-
-//attention.toast({msg: "Hello", icon: "error"});
-//attention.error({msg: "heelo", footer: "<h2>sdsd</h2>"})
 
 let html = `
     <form action="/about" class="js-validateForm">
@@ -188,9 +191,14 @@ let html = `
     </form>
 `;
 
-document.querySelector('.test').addEventListener('click', function () {
-   attention.custom({msg: html, title: 'Choose dates'}).then();
-})
+
+const checkAvailability = document.querySelector('.js-checkAvailability');
+if (checkAvailability != null) {
+    checkAvailability.addEventListener('click', function () {
+        attention.custom({msg: html, title: 'Choose dates'}).then();
+    })
+}
+
 
 function notify(msg, msgType) {
     notie.alert({

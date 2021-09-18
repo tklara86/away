@@ -31,7 +31,8 @@
   padding: 0 50px;
   display: flex;
   border-bottom: 1px solid var(--borderHeader);
-  position: fixed;
+  position: sticky;
+  top: 0;
   z-index: 2;
   width: 100%;
 }
@@ -146,6 +147,10 @@ a:active {
 a:hover .icon {
   transition: .3s ease;
   fill: var(--linksHover);
+}
+a:hover .icon.icon-glass {
+  transition: .3s ease;
+  fill: #fff;
 }
 
 @include breakpoint(lg) {

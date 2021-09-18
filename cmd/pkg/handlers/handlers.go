@@ -47,3 +47,44 @@ func (m *Repository) About(w http.ResponseWriter, r *http.Request) {
 		StringMap: stringMap,
 	})
 }
+
+// RoseHill is the rosehill page handler
+func (m *Repository) RoseHill(w http.ResponseWriter, r *http.Request) {
+	stringMap := make(map[string]string)
+	stringMap["pageTitle"] = "RoseHill"
+
+	render.RenderTemplate(w, "rosehill.page.tmpl", &models.TemplateData{
+		StringMap: stringMap,
+	})
+}
+
+
+// MillHouse is the millhouse page handler
+func (m *Repository) MillHouse(w http.ResponseWriter, r *http.Request) {
+	stringMap := make(map[string]string)
+	stringMap["pageTitle"] = "MillHouse"
+
+	render.RenderTemplate(w, "millhouse.page.tmpl", &models.TemplateData{
+		StringMap: stringMap,
+	})
+}
+
+// Search is the search availability page handler
+func (m *Repository) Search(w http.ResponseWriter, r *http.Request) {
+	stringMap := make(map[string]string)
+	stringMap["pageTitle"] = "Search"
+
+	render.RenderTemplate(w, "search-availability.page.tmpl", &models.TemplateData{
+		StringMap: stringMap,
+	})
+}
+
+// Contact is the contact page handler
+func (m *Repository) Contact(w http.ResponseWriter, r *http.Request) {
+	stringMap := make(map[string]string)
+	stringMap["pageTitle"] = "Contact"
+
+	render.RenderTemplate(w, "contact.page.tmpl", &models.TemplateData{
+		StringMap: stringMap,
+	})
+}

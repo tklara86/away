@@ -2366,7 +2366,8 @@ label {
   border-bottom: 1px solid var(--borderHeader);
   min-height: 80px;
   padding: 0 50px;
-  position: fixed;
+  position: sticky;
+  top: 0;
   z-index: 2;
 }
 
@@ -2489,6 +2490,11 @@ a:hover .icon {
   transition: 0.3s ease;
 }
 
+a:hover .icon.icon-glass {
+  fill: #fff;
+  transition: 0.3s ease;
+}
+
 @media (max-width: 768px) {
   .nav-toggle {
     background: none;
@@ -2596,6 +2602,7 @@ button {
 
 .btn-primary:hover {
   background-color: #c34646;
+  color: #fff;
 }
 
 .btn-primary--light {
@@ -2865,7 +2872,6 @@ span.divider:not(:last-of-type):after {
 .section-project--wrapper {
   display: flex;
   gap: 50px;
-  margin: 100px auto;
   max-width: 1900px;
 }
 

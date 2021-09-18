@@ -37,6 +37,7 @@ button {
 
   &:hover {
     background-color: tint-shade-color-control(black, "bg-color", "primary", 1);
+    color: #fff;
   }
 
   &--light {
