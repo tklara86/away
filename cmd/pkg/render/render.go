@@ -3,6 +3,7 @@ package render
 import (
 	"bytes"
 	"fmt"
+	"github.com/justinas/nosurf"
 	"github.com/tklara86/away/cmd/pkg/config"
 	"github.com/tklara86/away/cmd/pkg/models"
 	"html/template"
@@ -20,11 +21,12 @@ func NewTemplates(a *config.AppConfig) {
 	app = a
 }
 
-func AddDefaultData(td *models.TemplateData) *models.TemplateData {
+func AddDefaultData(td *models.TemplateData, r *http.Request) *models.TemplateData {
+	td.CSRFToken = nosurf.Token(r)
 	return td
 }
 // RenderTemplate renders the template
-func RenderTemplate(w http.ResponseWriter, tmpl string, td *models.TemplateData) {
+func RenderTemplate(w http.ResponseWriter, r *http.Request, tmpl string, td *models.TemplateData) {
 
 	var tc map[string]*template.Template
 
@@ -40,7 +42,7 @@ func RenderTemplate(w http.ResponseWriter, tmpl string, td *models.TemplateData)
 		log.Fatal("could not get template from template cache")
 	}
 
-	td = AddDefaultData(td)
+	td = AddDefaultData(td, r)
 
 	buf := new(bytes.Buffer)
 

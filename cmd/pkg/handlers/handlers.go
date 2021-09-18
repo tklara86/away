@@ -1,6 +1,7 @@
 package handlers
 
 import (
+	"fmt"
 	"github.com/tklara86/away/cmd/pkg/config"
 	"github.com/tklara86/away/cmd/pkg/models"
 	"github.com/tklara86/away/cmd/pkg/render"
@@ -33,7 +34,7 @@ func (m *Repository) Home(w http.ResponseWriter, r *http.Request) {
 	stringMap := make(map[string]string)
 	stringMap["pageTitle"] = "Home page"
 
-	render.RenderTemplate(w, "home.page.tmpl", &models.TemplateData{
+	render.RenderTemplate(w, r,"home.page.tmpl", &models.TemplateData{
 		StringMap: stringMap,
 	})
 }
@@ -43,7 +44,7 @@ func (m *Repository) About(w http.ResponseWriter, r *http.Request) {
 	stringMap := make(map[string]string)
 	stringMap["pageTitle"] = "About page"
 
-	render.RenderTemplate(w, "about.page.tmpl", &models.TemplateData{
+	render.RenderTemplate(w, r, "about.page.tmpl", &models.TemplateData{
 		StringMap: stringMap,
 	})
 }
@@ -53,7 +54,7 @@ func (m *Repository) RoseHill(w http.ResponseWriter, r *http.Request) {
 	stringMap := make(map[string]string)
 	stringMap["pageTitle"] = "RoseHill"
 
-	render.RenderTemplate(w, "rosehill.page.tmpl", &models.TemplateData{
+	render.RenderTemplate(w, r, "rosehill.page.tmpl", &models.TemplateData{
 		StringMap: stringMap,
 	})
 }
@@ -64,19 +65,31 @@ func (m *Repository) MillHouse(w http.ResponseWriter, r *http.Request) {
 	stringMap := make(map[string]string)
 	stringMap["pageTitle"] = "MillHouse"
 
-	render.RenderTemplate(w, "millhouse.page.tmpl", &models.TemplateData{
+	render.RenderTemplate(w, r, "millhouse.page.tmpl", &models.TemplateData{
 		StringMap: stringMap,
 	})
 }
 
-// Search is the search availability page handler
-func (m *Repository) Search(w http.ResponseWriter, r *http.Request) {
+// Availability is the availability page handler
+func (m *Repository) Availability(w http.ResponseWriter, r *http.Request) {
 	stringMap := make(map[string]string)
 	stringMap["pageTitle"] = "Search"
 
-	render.RenderTemplate(w, "search-availability.page.tmpl", &models.TemplateData{
+	render.RenderTemplate(w, r,"search-availability.page.tmpl", &models.TemplateData{
 		StringMap: stringMap,
 	})
+}
+
+// PostAvailability is the search availability page handler
+func (m *Repository) PostAvailability(w http.ResponseWriter, r *http.Request) {
+	startDate := r.Form.Get("startDate")
+	endDate := r.Form.Get("endDate")
+
+	_, err := w.Write([]byte(fmt.Sprintf("start date is %s and end date is %s", startDate,
+		endDate)))
+	if err != nil {
+		fmt.Println(err)
+	}
 }
 
 // Contact is the contact page handler
@@ -84,7 +97,16 @@ func (m *Repository) Contact(w http.ResponseWriter, r *http.Request) {
 	stringMap := make(map[string]string)
 	stringMap["pageTitle"] = "Contact"
 
-	render.RenderTemplate(w, "contact.page.tmpl", &models.TemplateData{
+	render.RenderTemplate(w, r, "contact.page.tmpl", &models.TemplateData{
+		StringMap: stringMap,
+	})
+}
+// MakeReservation is the reservation page handler
+func (m *Repository) MakeReservation(w http.ResponseWriter, r *http.Request) {
+	stringMap := make(map[string]string)
+	stringMap["pageTitle"] = "Make a Reservation"
+
+	render.RenderTemplate(w, r, "make-reservation.page.tmpl", &models.TemplateData{
 		StringMap: stringMap,
 	})
 }

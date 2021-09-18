@@ -86,9 +86,11 @@ class FormValidator {
             const input = field.getAttribute('id')
             const inputId = document.querySelector(`#${input}`)
             inputId.addEventListener('input', e => {
-               self.validateFields(field);
+                self.validateFields(field);
 
             })
+
+
         })
     }
 
@@ -168,7 +170,6 @@ const validator = new FormValidator(form, fields)
 if (form != null) {
     validator.init();
 }
-
 
 
 let html = `

@@ -1,0 +1,42 @@
+{{ template "base" .}}
+
+{{ define "content"}}
+    <div class="container">
+        <!-- Form -->
+        <form action="/make-reservation" method="get" class="js-validateForm">
+            <h3 class="mb-10">Make reservation</h3>
+            <div class="form-control">
+                <label class="form-label" for="firstName">First Name</label>
+                <input class="input-control input-control--small" type="text" name="firstName" id="firstName" placeholder="First Name">
+                <span class="form-alert"></span>
+                <span class="error-message"></span>
+            </div>
+
+            <div class="form-control">
+                <label class="form-label" for="lastName">Last Name</label>
+                <input class="input-control input-control--small" type="text" name="lastName" id="lastName" placeholder="Last Name">
+                <span class="form-alert"></span>
+                <span class="error-message"></span>
+            </div>
+
+            <div class="form-control">
+                <label class="form-label" for="email">Email</label>
+                <input class="input-control input-control--small" type="email" name="email" id="email" placeholder="Email">
+                <span class="form-alert"></span>
+                <span class="error-message"></span>
+            </div>
+
+            <div class="form-control">
+                <label class="form-label" for="phoneNumber">Phone Number</label>
+                <input class="input-control input-control--small" type="text" name="phoneNumber" id="phoneNumber" placeholder="Phone Number">
+                <span class="form-alert"></span>
+                <span class="error-message"></span>
+            </div>
+
+            <button type="submit" class="btn btn-primary btn-medium">Make Reservation</button>
+
+        </form>
+    </div>
+
+
+{{end}}

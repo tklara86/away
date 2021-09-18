@@ -17,8 +17,10 @@ func Routes(app *config.AppConfig) http.Handler {
 	r.Get("/about", handlers.Repo.About)
 	r.Get("/millhouse", handlers.Repo.MillHouse)
 	r.Get("/rosehill", handlers.Repo.RoseHill)
-	r.Get("/search-availability", handlers.Repo.Search)
+	r.Get("/search-availability", handlers.Repo.Availability)
+	r.Post("/search-availability", handlers.Repo.PostAvailability)
 	r.Get("/contact", handlers.Repo.Contact)
+	r.Get("/make-reservation", handlers.Repo.MakeReservation)
 
 
 	// Creates a file server which serves files out of the "./ui/static" directory.
