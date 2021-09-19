@@ -14,12 +14,18 @@ func Routes(app *config.AppConfig) http.Handler {
 	r.Use(SessionLoad)
 
 	r.Get("/", handlers.Repo.Home)
+
 	r.Get("/about", handlers.Repo.About)
+
 	r.Get("/millhouse", handlers.Repo.MillHouse)
 	r.Get("/rosehill", handlers.Repo.RoseHill)
+
 	r.Get("/search-availability", handlers.Repo.Availability)
 	r.Post("/search-availability", handlers.Repo.PostAvailability)
+	r.Post("/search-availability-json", handlers.Repo.AvailabilityJSON)
+
 	r.Get("/contact", handlers.Repo.Contact)
+
 	r.Get("/make-reservation", handlers.Repo.MakeReservation)
 
 

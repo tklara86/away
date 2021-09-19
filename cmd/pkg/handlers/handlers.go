@@ -1,6 +1,7 @@
 package handlers
 
 import (
+	"encoding/json"
 	"fmt"
 	"github.com/tklara86/away/cmd/pkg/config"
 	"github.com/tklara86/away/cmd/pkg/models"
@@ -91,6 +92,31 @@ func (m *Repository) PostAvailability(w http.ResponseWriter, r *http.Request) {
 		fmt.Println(err)
 	}
 }
+
+
+type jsonResponse struct {
+	OK bool 			`json:"ok"`
+	Message string 		`json:"message"`
+}
+// AvailabilityJSON handles request for availability and sends JSON response
+func (m *Repository) AvailabilityJSON(w http.ResponseWriter, r *http.Request) {
+	response := jsonResponse{
+		OK: true,
+		Message: "Available",
+	}
+
+	j, err := json.MarshalIndent(response, "", "  ")
+	if err != nil {
+		fmt.Println(err.Error())
+	}
+
+	w.Header().Set("Content-Type", "application/json")
+	_, err = w.Write(j)
+	if err != nil {
+		fmt.Println(err.Error())
+	}
+}
+
 
 // Contact is the contact page handler
 func (m *Repository) Contact(w http.ResponseWriter, r *http.Request) {
