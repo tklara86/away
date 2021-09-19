@@ -3,9 +3,9 @@ package handlers
 import (
 	"encoding/json"
 	"fmt"
-	"github.com/tklara86/away/cmd/pkg/config"
-	"github.com/tklara86/away/cmd/pkg/models"
-	"github.com/tklara86/away/cmd/pkg/render"
+	"github.com/tklara86/away/internal/config"
+	"github.com/tklara86/away/internal/models"
+	"github.com/tklara86/away/internal/render"
 	"net/http"
 )
 

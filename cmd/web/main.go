@@ -2,9 +2,9 @@ package main
 
 import (
 	"github.com/alexedwards/scs/v2"
-	"github.com/tklara86/away/cmd/pkg/config"
-	"github.com/tklara86/away/cmd/pkg/handlers"
-	"github.com/tklara86/away/cmd/pkg/render"
+	"github.com/tklara86/away/internal/config"
+	"github.com/tklara86/away/internal/handlers"
+	"github.com/tklara86/away/internal/render"
 	"log"
 	"net/http"
 	"os"

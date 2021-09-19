@@ -2,8 +2,8 @@ package main
 
 import (
 	"github.com/go-chi/chi"
-	"github.com/tklara86/away/cmd/pkg/config"
-	"github.com/tklara86/away/cmd/pkg/handlers"
+	"github.com/tklara86/away/internal/config"
+	"github.com/tklara86/away/internal/handlers"
 	"net/http"
 )
 
