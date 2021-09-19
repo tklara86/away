@@ -4,8 +4,10 @@ import (
 	"encoding/json"
 	"fmt"
 	"github.com/tklara86/away/internal/config"
+	"github.com/tklara86/away/internal/forms"
 	"github.com/tklara86/away/internal/models"
 	"github.com/tklara86/away/internal/render"
+	"log"
 	"net/http"
 )
 
@@ -134,5 +136,37 @@ func (m *Repository) MakeReservation(w http.ResponseWriter, r *http.Request) {
 
 	render.RenderTemplate(w, r, "make-reservation.page.tmpl", &models.TemplateData{
 		StringMap: stringMap,
+		Form: forms.New(nil),
 	})
+}
+
+// PostMakeReservation handles the posting of a reservation form
+func (m *Repository) PostMakeReservation(w http.ResponseWriter, r *http.Request) {
+	err := r.ParseForm()
+	if err != nil {
+		log.Println(err)
+		return
+	}
+
+	reservation := models.Reservation{
+		FirstName: r.Form.Get("firstName"),
+		LastName: r.Form.Get("lastName"),
+		Email: r.Form.Get("email"),
+		Phone: r.Form.Get("phoneNumber"),
+	}
+
+	form := forms.New(r.PostForm)
+
+	form.Has("firstName", r)
+
+	if !form.Valid() {
+		data := make(map[string]interface{})
+		data["reservation"] = reservation
+
+		render.RenderTemplate(w, r, "make-reservation.page.tmpl", &models.TemplateData{
+			Form: form,
+			Data: data,
+		})
+		return
+	}
 }

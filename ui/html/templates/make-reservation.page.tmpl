@@ -3,13 +3,21 @@
 {{ define "content"}}
     <div class="container">
         <!-- Form -->
-        <form action="/make-reservation" method="get" class="js-validateForm">
+        <form action="/make-reservation" method="post">
+            <input type="hidden" name="csrf_token" value="{{.CSRFToken}}">
             <h3 class="mb-10">Make reservation</h3>
+
             <div class="form-control">
+
                 <label class="form-label" for="firstName">First Name</label>
-                <input class="input-control input-control--small" type="text" name="firstName" id="firstName" placeholder="First Name">
-                <span class="form-alert"></span>
-                <span class="error-message"></span>
+                <input class="input-control input-control--small {{with .Form.Errors.Get
+                "firstName"}} is-danger {{end}}" type="text" name="firstName"
+                       id="firstName" placeholder="First Name">
+
+                <span class="form-alert {{with .Form.Errors.Get "firstName"}} is-danger {{end}}"></span>
+                {{with .Form.Errors.Get "firstName"}}
+                <span class="error-message">{{.}}</span>
+                {{end}}
             </div>
 
             <div class="form-control">
