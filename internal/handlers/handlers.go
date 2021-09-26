@@ -134,9 +134,15 @@ func (m *Repository) MakeReservation(w http.ResponseWriter, r *http.Request) {
 	stringMap := make(map[string]string)
 	stringMap["pageTitle"] = "Make a Reservation"
 
+	var emptyReservation models.Reservation
+
+	data := make(map[string]interface{})
+	data["reservation"] = emptyReservation
+
 	render.RenderTemplate(w, r, "make-reservation.page.tmpl", &models.TemplateData{
 		StringMap: stringMap,
 		Form: forms.New(nil),
+		Data: data,
 	})
 }
 
@@ -157,7 +163,9 @@ func (m *Repository) PostMakeReservation(w http.ResponseWriter, r *http.Request)
 
 	form := forms.New(r.PostForm)
 
-	form.Has("firstName", r)
+	form.Required("firstName", "lastName", "email", "phoneNumber")
+	form.MinLength("firstName", 3, r)
+	form.IsEmail("email")
 
 	if !form.Valid() {
 		data := make(map[string]interface{})
@@ -169,4 +177,35 @@ func (m *Repository) PostMakeReservation(w http.ResponseWriter, r *http.Request)
 		})
 		return
 	}
+
+	m.App.Session.Put(r.Context(), "reservation", reservation)
+
+	http.Redirect(w, r, "/reservation-summary", http.StatusSeeOther)
+}
+
+
+// ReservationSummary shows reservation summary
+func (m *Repository) ReservationSummary(w http.ResponseWriter, r *http.Request) {
+	stringMap := make(map[string]string)
+	stringMap["pageTitle"] = "Reservation Summary"
+
+	reservation, ok := m.App.Session.Get(r.Context(),"reservation").(models.Reservation)
+	if !ok {
+		log.Println("Cannot get item from session")
+		m.App.Session.Put(r.Context(), "error", "Cannot get reservation from session")
+		http.Redirect(w, r, "/", http.StatusTemporaryRedirect)
+		return
+	}
+
+	m.App.Session.Remove(r.Context(), "reservation")
+	data := make(map[string]interface{})
+	data["reservation"] = reservation
+
+	render.RenderTemplate(w, r, "reservation-summary.page.tmpl", &models.TemplateData{
+		StringMap: stringMap,
+		Data: data,
+	})
+
+
+
 }

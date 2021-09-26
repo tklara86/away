@@ -108,10 +108,24 @@
     {{ end}}
 
 
+
     {{ block "js" .}}
         <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
         <script src="https://unpkg.com/notie"></script>
         <script src="/static/dist/app.js"></script>
+        <script>
+            {{with .Error}}
+            notify("{{.}}", "error")
+            {{end}}
+
+            {{with .Flash}}
+            notify("{{.}}", "success")
+            {{end}}
+
+            {{with .Warning}}
+            notify("{{.}}", "success")
+            {{end}}
+        </script>
     {{ end }}
     </body>
     </html>

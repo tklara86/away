@@ -3,6 +3,7 @@
 {{ define "content"}}
     <div class="container">
         <!-- Form -->
+        {{$res := index .Data "reservation"}}
         <form action="/make-reservation" method="post">
             <input type="hidden" name="csrf_token" value="{{.CSRFToken}}">
             <h3 class="mb-10">Make reservation</h3>
@@ -12,7 +13,7 @@
                 <label class="form-label" for="firstName">First Name</label>
                 <input class="input-control input-control--small {{with .Form.Errors.Get
                 "firstName"}} is-danger {{end}}" type="text" name="firstName"
-                       id="firstName" placeholder="First Name">
+                       id="firstName" placeholder="First Name" value="{{$res.FirstName}}">
 
                 <span class="form-alert {{with .Form.Errors.Get "firstName"}} is-danger {{end}}"></span>
                 {{with .Form.Errors.Get "firstName"}}
@@ -22,23 +23,38 @@
 
             <div class="form-control">
                 <label class="form-label" for="lastName">Last Name</label>
-                <input class="input-control input-control--small" type="text" name="lastName" id="lastName" placeholder="Last Name">
-                <span class="form-alert"></span>
-                <span class="error-message"></span>
+                <input class="input-control input-control--small {{with .Form.Errors.Get
+                "lastName"}} is-danger {{end}}" type="text" name="lastName"
+                       id="lastName" placeholder="Last Name"
+                       value="{{$res.LastName}}">
+                <span class="form-alert {{with .Form.Errors.Get "lastName"}} is-danger{{end}}"></span>
+                {{with .Form.Errors.Get "lastName"}}
+                <span class="error-message">{{.}}</span>
+                {{end}}
             </div>
 
             <div class="form-control">
                 <label class="form-label" for="email">Email</label>
-                <input class="input-control input-control--small" type="email" name="email" id="email" placeholder="Email">
-                <span class="form-alert"></span>
-                <span class="error-message"></span>
+                <input class="input-control input-control--small {{with .Form.Errors.Get
+                "email"}} is-danger {{end}}" type="email" name="email"
+                       id="email" placeholder="Email" value="{{$res.Email}}">
+                <span class="form-alert {{with .Form.Errors.Get
+                "email"}} is-danger {{end}}"></span>
+                {{with .Form.Errors.Get "email"}}
+                <span class="error-message">{{.}}</span>
+                {{end}}
             </div>
 
             <div class="form-control">
                 <label class="form-label" for="phoneNumber">Phone Number</label>
-                <input class="input-control input-control--small" type="text" name="phoneNumber" id="phoneNumber" placeholder="Phone Number">
-                <span class="form-alert"></span>
-                <span class="error-message"></span>
+                <input class="input-control input-control--small {{with .Form.Errors.Get
+                "phoneNumber"}} is-danger {{end}}" type="text" name="phoneNumber"
+                       id="phoneNumber" placeholder="Phone Number" value="{{$res.Phone}}">
+                <span class="form-alert {{with .Form.Errors.Get
+                "phoneNumber"}} is-danger {{end}}"></span>
+                {{with .Form.Errors.Get "phoneNumber"}}
+                <span class="error-message">{{.}}</span>
+                {{end}}
             </div>
 
             <button type="submit" class="btn btn-primary btn-medium">Make Reservation</button>

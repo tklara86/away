@@ -235,6 +235,8 @@ function notifyModal(title, text, icon, confirmationButton) {
         confirmButtonText: confirmationButton
     })
 }
+
+
 //
 // // Prompt is module for alerts, notifications, and custom popup dialogs
 // function Prompt() {

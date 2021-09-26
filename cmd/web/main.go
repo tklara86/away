@@ -1,9 +1,11 @@
 package main
 
 import (
+	"encoding/gob"
 	"github.com/alexedwards/scs/v2"
 	"github.com/tklara86/away/internal/config"
 	"github.com/tklara86/away/internal/handlers"
+	"github.com/tklara86/away/internal/models"
 	"github.com/tklara86/away/internal/render"
 	"log"
 	"net/http"
@@ -17,6 +19,8 @@ var session *scs.SessionManager
 
 // main is the main application function
 func main() {
+	// what to store in the session
+	gob.Register(models.Reservation{})
 
 	app.InProduction = false
 
