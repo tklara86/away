@@ -5,6 +5,7 @@ import (
 	"github.com/alexedwards/scs/v2"
 	"github.com/tklara86/away/internal/config"
 	"github.com/tklara86/away/internal/handlers"
+	"github.com/tklara86/away/internal/helpers"
 	"github.com/tklara86/away/internal/models"
 	"github.com/tklara86/away/internal/render"
 	"log"
@@ -15,6 +16,8 @@ import (
 
 var app config.AppConfig
 var session *scs.SessionManager
+var infoLog *log.Logger
+var errorLog *log.Logger
 
 
 // main is the main application function
@@ -23,6 +26,12 @@ func main() {
 	gob.Register(models.Reservation{})
 
 	app.InProduction = false
+
+	infoLog = log.New(os.Stdout, "INFO\t", log.LstdFlags)
+	app.InfoLog = infoLog
+
+	errorLog = log.New(os.Stdout, "ERROR\t", log.LstdFlags|log.Lshortfile)
+	app.ErrorLog = errorLog
 
 	var app config.AppConfig
 
@@ -49,7 +58,8 @@ func main() {
 
 	render.NewTemplates(&app)
 
-	logger := log.New(os.Stdout, "", log.LstdFlags)
+	helpers.NewHelpers(&app)
+	// logger := log.New(os.Stdout, "", log.LstdFlags)
 
 	mux := Routes(&app)
 
@@ -59,7 +69,7 @@ func main() {
 		Handler: mux,
 	}
 
-	logger.Printf("starting server on port:%s", srv.Addr)
+	//logger.Printf("starting server on port:%s", srv.Addr)
 	err = srv.ListenAndServe()
 	log.Fatal(err)
 }

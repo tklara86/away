@@ -5,9 +5,9 @@ import (
 	"fmt"
 	"github.com/tklara86/away/internal/config"
 	"github.com/tklara86/away/internal/forms"
+	"github.com/tklara86/away/internal/helpers"
 	"github.com/tklara86/away/internal/models"
 	"github.com/tklara86/away/internal/render"
-	"log"
 	"net/http"
 )
 
@@ -109,7 +109,8 @@ func (m *Repository) AvailabilityJSON(w http.ResponseWriter, r *http.Request) {
 
 	j, err := json.MarshalIndent(response, "", "  ")
 	if err != nil {
-		fmt.Println(err.Error())
+		helpers.ServerError(w, err)
+		return
 	}
 
 	w.Header().Set("Content-Type", "application/json")
@@ -150,7 +151,7 @@ func (m *Repository) MakeReservation(w http.ResponseWriter, r *http.Request) {
 func (m *Repository) PostMakeReservation(w http.ResponseWriter, r *http.Request) {
 	err := r.ParseForm()
 	if err != nil {
-		log.Println(err)
+		helpers.ServerError(w, err)
 		return
 	}
 
@@ -191,7 +192,7 @@ func (m *Repository) ReservationSummary(w http.ResponseWriter, r *http.Request) 
 
 	reservation, ok := m.App.Session.Get(r.Context(),"reservation").(models.Reservation)
 	if !ok {
-		log.Println("Cannot get item from session")
+		m.App.ErrorLog.Println("can't get error from session")
 		m.App.Session.Put(r.Context(), "error", "Cannot get reservation from session")
 		http.Redirect(w, r, "/", http.StatusTemporaryRedirect)
 		return
