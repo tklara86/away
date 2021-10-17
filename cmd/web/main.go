@@ -36,6 +36,7 @@ func main() {
 	dbHost := os.Getenv("DB_HOST")
 	dbUser := os.Getenv("DB_USER")
 	dbPassword := os.Getenv("DB_PASSWORD")
+	dbName := os.Getenv("DB_NAME")
 
 
 	// what to store in the session
@@ -68,7 +69,7 @@ func main() {
 	log.Println("connecting to database")
 
 
-	dsn := fmt.Sprintf("host=%s port=5432 dbname=away user=%s password=%s\n", dbHost, dbUser,
+	dsn := fmt.Sprintf("host=%s port=5432 dbname=%s user=%s password=%s\n", dbHost, dbName, dbUser,
 		dbPassword)
 
 	db, err := driver.ConnectSQL(dsn)
