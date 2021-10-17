@@ -3,4 +3,4 @@
 node_modules
 database.yml
 run.sh
-Makefile
+.env

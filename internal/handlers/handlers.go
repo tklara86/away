@@ -4,10 +4,13 @@ import (
 	"encoding/json"
 	"fmt"
 	"github.com/tklara86/away/internal/config"
+	"github.com/tklara86/away/internal/driver"
 	"github.com/tklara86/away/internal/forms"
 	"github.com/tklara86/away/internal/helpers"
 	"github.com/tklara86/away/internal/models"
 	"github.com/tklara86/away/internal/render"
+	"github.com/tklara86/away/internal/repository"
+	"github.com/tklara86/away/internal/repository/dbrepo"
 	"net/http"
 )
 
@@ -18,12 +21,14 @@ var Repo *Repository
 // Repository is the repository type
 type Repository struct {
 	App *config.AppConfig
+	DB repository.DatabaseRepo
 }
 
 // NewRepo creates a new repository
-func NewRepo(a *config.AppConfig) *Repository {
+func NewRepo(a *config.AppConfig, db *driver.DB) *Repository {
 	return &Repository{
 		App: a,
+		DB: dbrepo.NewPostgresRepo(db.SQL, a),
 	}
 }
 
@@ -37,7 +42,7 @@ func (m *Repository) Home(w http.ResponseWriter, r *http.Request) {
 	stringMap := make(map[string]string)
 	stringMap["pageTitle"] = "Home page"
 
-	render.RenderTemplate(w, r,"home.page.tmpl", &models.TemplateData{
+	render.Template(w, r,"home.page.tmpl", &models.TemplateData{
 		StringMap: stringMap,
 	})
 }
@@ -47,7 +52,7 @@ func (m *Repository) About(w http.ResponseWriter, r *http.Request) {
 	stringMap := make(map[string]string)
 	stringMap["pageTitle"] = "About page"
 
-	render.RenderTemplate(w, r, "about.page.tmpl", &models.TemplateData{
+	render.Template(w, r, "about.page.tmpl", &models.TemplateData{
 		StringMap: stringMap,
 	})
 }
@@ -57,7 +62,7 @@ func (m *Repository) RoseHill(w http.ResponseWriter, r *http.Request) {
 	stringMap := make(map[string]string)
 	stringMap["pageTitle"] = "RoseHill"
 
-	render.RenderTemplate(w, r, "rosehill.page.tmpl", &models.TemplateData{
+	render.Template(w, r, "rosehill.page.tmpl", &models.TemplateData{
 		StringMap: stringMap,
 	})
 }
@@ -68,7 +73,7 @@ func (m *Repository) MillHouse(w http.ResponseWriter, r *http.Request) {
 	stringMap := make(map[string]string)
 	stringMap["pageTitle"] = "MillHouse"
 
-	render.RenderTemplate(w, r, "millhouse.page.tmpl", &models.TemplateData{
+	render.Template(w, r, "millhouse.page.tmpl", &models.TemplateData{
 		StringMap: stringMap,
 	})
 }
@@ -78,7 +83,7 @@ func (m *Repository) Availability(w http.ResponseWriter, r *http.Request) {
 	stringMap := make(map[string]string)
 	stringMap["pageTitle"] = "Search"
 
-	render.RenderTemplate(w, r,"search-availability.page.tmpl", &models.TemplateData{
+	render.Template(w, r,"search-availability.page.tmpl", &models.TemplateData{
 		StringMap: stringMap,
 	})
 }
@@ -126,7 +131,7 @@ func (m *Repository) Contact(w http.ResponseWriter, r *http.Request) {
 	stringMap := make(map[string]string)
 	stringMap["pageTitle"] = "Contact"
 
-	render.RenderTemplate(w, r, "contact.page.tmpl", &models.TemplateData{
+	render.Template(w, r, "contact.page.tmpl", &models.TemplateData{
 		StringMap: stringMap,
 	})
 }
@@ -140,7 +145,7 @@ func (m *Repository) MakeReservation(w http.ResponseWriter, r *http.Request) {
 	data := make(map[string]interface{})
 	data["reservation"] = emptyReservation
 
-	render.RenderTemplate(w, r, "make-reservation.page.tmpl", &models.TemplateData{
+	render.Template(w, r, "make-reservation.page.tmpl", &models.TemplateData{
 		StringMap: stringMap,
 		Form: forms.New(nil),
 		Data: data,
@@ -172,7 +177,7 @@ func (m *Repository) PostMakeReservation(w http.ResponseWriter, r *http.Request)
 		data := make(map[string]interface{})
 		data["reservation"] = reservation
 
-		render.RenderTemplate(w, r, "make-reservation.page.tmpl", &models.TemplateData{
+		render.Template(w, r, "make-reservation.page.tmpl", &models.TemplateData{
 			Form: form,
 			Data: data,
 		})
@@ -202,7 +207,7 @@ func (m *Repository) ReservationSummary(w http.ResponseWriter, r *http.Request) 
 	data := make(map[string]interface{})
 	data["reservation"] = reservation
 
-	render.RenderTemplate(w, r, "reservation-summary.page.tmpl", &models.TemplateData{
+	render.Template(w, r, "reservation-summary.page.tmpl", &models.TemplateData{
 		StringMap: stringMap,
 		Data: data,
 	})
