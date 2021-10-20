@@ -12,6 +12,8 @@ import (
 	"github.com/tklara86/away/internal/repository"
 	"github.com/tklara86/away/internal/repository/dbrepo"
 	"net/http"
+	"strconv"
+	"time"
 )
 
 
@@ -160,16 +162,39 @@ func (m *Repository) PostMakeReservation(w http.ResponseWriter, r *http.Request)
 		return
 	}
 
+	sd := r.Form.Get("start_date")
+	ed := r.Form.Get("end_date")
+
+	// 2020-01-01 01/02 03:04:05PM '06 -0700
+
+	layout := "2006-01-02"
+	startDate, err := time.Parse(layout,sd)
+	if err != nil {
+		helpers.ServerError(w, err)
+	}
+	endDate, err := time.Parse(layout,ed)
+	if err != nil {
+		helpers.ServerError(w, err)
+	}
+
+	roomId, err := strconv.Atoi(r.Form.Get("room_id"))
+	if err != nil {
+		helpers.ServerError(w, err)
+	}
+
 	reservation := models.Reservation{
 		FirstName: r.Form.Get("firstName"),
 		LastName: r.Form.Get("lastName"),
 		Email: r.Form.Get("email"),
-		Phone: r.Form.Get("phoneNumber"),
+		Phone: r.Form.Get("phone"),
+		StartDate: startDate,
+		EndDate: endDate,
+		RoomID: roomId,
 	}
 
 	form := forms.New(r.PostForm)
 
-	form.Required("firstName", "lastName", "email", "phoneNumber")
+	form.Required("firstName", "lastName", "email", "phone")
 	form.MinLength("firstName", 3, r)
 	form.IsEmail("email")
 
@@ -182,6 +207,11 @@ func (m *Repository) PostMakeReservation(w http.ResponseWriter, r *http.Request)
 			Data: data,
 		})
 		return
+	}
+
+	err = m.DB.InsertReservation(reservation)
+	if err != nil {
+		helpers.ServerError(w, err)
 	}
 
 	m.App.Session.Put(r.Context(), "reservation", reservation)

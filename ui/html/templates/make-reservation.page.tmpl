@@ -46,18 +46,36 @@
             </div>
 
             <div class="form-control">
-                <label class="form-label" for="phoneNumber">Phone Number</label>
+                <label class="form-label" for="phone">Phone Number</label>
                 <input class="input-control input-control--small {{with .Form.Errors.Get
-                "phoneNumber"}} is-danger {{end}}" type="text" name="phoneNumber"
-                       id="phoneNumber" placeholder="Phone Number" value="{{$res.Phone}}">
+                "phone"}} is-danger {{end}}" type="text" name="phone"
+                       id="phone" placeholder="Phone Number" value="{{$res.Phone}}">
                 <span class="form-alert {{with .Form.Errors.Get
-                "phoneNumber"}} is-danger {{end}}"></span>
-                {{with .Form.Errors.Get "phoneNumber"}}
+                "phone"}} is-danger {{end}}"></span>
+                {{with .Form.Errors.Get "phone"}}
                 <span class="error-message">{{.}}</span>
                 {{end}}
             </div>
 
-            <button type="submit" class="btn btn-primary btn-medium">Make Reservation</button>
+            <div class="form-control">
+                <label class="form-label" for="start_date">Start Date</label>
+                <input class="input-control input-control--small" type="date" name="start_date"
+                       id="start_date" placeholder="Start Date" value="{{$res.StartDate}}">
+                <span class="form-alert"></span>
+            </div>
+            <input type="hidden" name="room_id" value="1"></input>
+            <div class="form-control">
+                <label class="form-label" for="end_date">End Date</label>
+                <input class="input-control input-control--small" type="date" name="end_date"
+                       id="end_date" placeholder="Start Date" value="{{$res.EndDate}}">
+                <span class="form-alert"></span>
+            </div>
+
+
+
+
+
+            <button type="submit" value class="btn btn-primary btn-medium">Make Reservation</button>
 
         </form>
     </div>
